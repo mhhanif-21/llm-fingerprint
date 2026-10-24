@@ -1,0 +1,6 @@
+# Salin ke kaggle.local.toml dan isi target akun yang telah diotorisasi.
+kernel = ""
+competition = "name-that-llm"
+title = "llmName"
+poll_seconds = 30
+timeout_seconds = 1200
