@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "llmname"
+version = "0.1.0"
+description = "Reproducible model attribution experiments"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "specialone" }]
+dependencies = [
+    "pandas>=2.2,<4",
+    "numpy>=1.26,<3",
+    "scikit-learn>=1.6,<2",
+    "scipy>=1.11,<2",
+    "matplotlib>=3.8,<4",
+    "seaborn>=0.13,<0.14",
+    "markdown>=3.5,<4",
+    "joblib>=1.4,<2",
+    "pyarrow>=15,<30",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.11,<1", "pathspec>=0.12,<2"]
+kaggle = ["kaggle>=2.2.5,<3"]
+
+[project.scripts]
+llm-eda = "llm_eda.cli:main"
+llmname = "llmname.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["llmname*", "llm_eda*"]
+
+[tool.setuptools.package-data]
+"llmname.eda.reporting" = ["*.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["e2e: Alur integrasi nyata", "kaggle: Integrasi API Kaggle nyata"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["name-that-llm", "reports", "artifacts", "kaggle", "notebooks"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

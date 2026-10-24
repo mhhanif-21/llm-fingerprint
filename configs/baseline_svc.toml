@@ -1,0 +1,37 @@
+[experiment]
+seed = 42
+n_splits = 5
+output_dir = "artifacts/runs"
+threads = 2
+
+[model]
+name = "linear_svc"
+
+[model.params]
+C = 1.0
+max_iter = 5000
+dual = "auto"
+
+[features]
+branches = ["word", "char", "style"]
+cache = true
+
+[features.word]
+ngram_range = [1, 2]
+min_df = 2
+max_df = 0.90
+max_features = 20000
+sublinear_tf = true
+
+[features.char]
+analyzer = "char_wb"
+ngram_range = [3, 5]
+min_df = 2
+max_features = 60000
+sublinear_tf = true
+
+[features.style]
+groups = ["length", "case", "lexical", "punctuation", "format", "unicode"]
+include = []
+exclude = []
+candidates = []
